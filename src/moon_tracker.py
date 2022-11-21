@@ -1,5 +1,4 @@
 from skyfield.api import load
-import numpy as np
 
 # Class to handle tracking Moon's position
 class MoonTracker:

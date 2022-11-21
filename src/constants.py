@@ -10,11 +10,11 @@ TELEMETRY_PLOT_COLORS = "lime"
 SPACE_COLOR = "black"
 BG_COLOR = "black"
 FG_COLOR = "white"
+MOON_PATH_COLOR = "darkgray"
 
 # Other plotting constants
 MAX_DISTANCE = 450000   # Used for scaling distance plot
 MAX_VELOCITY = 8        # Used for scaling velocity plot
-BODY_RESOLUTION = 15    # Resolution for drawing Earth and Moon
 MAX_X = 1200000
 MIN_X = -1200000
 MAX_Y = 1000000
