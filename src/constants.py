@@ -21,3 +21,4 @@ MAX_Y = 1000000
 MIN_Y = -1000000
 
 MOON_ERASER_INCREASE = 2000 # How many units of distance to add to moon's radius for moon eraser patch
+DIVIDE_BY = 5               # Used to divide the data by some number for increased animation speed

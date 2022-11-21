@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 import matplotlib.patches as patches
 import matplotlib as mpl
+from matplotlib.ticker import FormatStrFormatter
 from constants import *
 from utils import *
 
@@ -78,6 +79,9 @@ class ArtemisVis:
         self.map_plot.set_ylim([self.map_min_y, self.map_max_y])
         self.map_plot.set_xlabel("distance (1000 km)")
         self.map_plot.set_ylabel("distance (km)")
+
+        # Prevents abbreviation of large numbers on x axis
+        self.fig.gca().xaxis.set_major_formatter(FormatStrFormatter("%d"))
 
         # Draw Earth
         self.map_plot.add_patch(patches.Circle((0, 0), radius = EARTH_RADIUS, color = EARTH_COLOR))
