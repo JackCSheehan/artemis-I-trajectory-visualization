@@ -23,9 +23,9 @@ mpl.rcParams["axes.facecolor"] = BG_COLOR
 class ArtemisVis:
     # Sets up matplotlib. Takes the number of time data points for scaling the distance/velocity plots and the max/min
     # values for each axis of the map plot
-    def __init__(self, date_count, max_x, min_x, max_y, min_y):
+    def __init__(self, date_count):
         # Set up figure
-        self.fig = plt.figure("Artemis I", figsize = (9, 5))
+        self.fig = plt.figure("Artemis I", figsize = (12, 7))
         self.fig.set_facecolor(BG_COLOR)
         self.fig.subplots_adjust(top = 0.95, bottom = 0.1, left = 0.11, right = 0.98)
 
@@ -38,10 +38,8 @@ class ArtemisVis:
         self.gs.update(wspace = .3, hspace = .45)
 
         self.date_count = date_count
-        self.map_max_x = max_x
-        self.map_min_x = min_x
-        self.map_max_y = max_y
-        self.map_min_y = min_y
+
+        self.setup_plots()
 
     # Used to end program when matplotlib window closed
     def __exit_program(self, _):
@@ -55,30 +53,36 @@ class ArtemisVis:
 
         # Plots distance over time
         self.distance_plot = self.fig.add_subplot(self.gs.new_subplotspec((0, 1)))
-        self.distance_plot.set_title("Distance From Earth (km)")
-        self.distance_plot.set_xlim([0, self.date_count])
-        self.distance_plot.set_ylim([0, MAX_DISTANCE])
-        self.distance_plot.set_xticks([], [])
-        self.distance_plot.set_xlabel("time")
-        self.distance_plot.set_ylabel("distance (km)")
+        self.distance_plot.set(
+            title = "Distance From Earth (km)",
+            xlim = [0, self.date_count],
+            ylim = [0, MAX_DISTANCE],
+            xticks = [],
+            xlabel = "time",
+            ylabel = "distance (km)"
+        )
 
         # Plots velocity over time
         self.vel_plot = self.fig.add_subplot(self.gs.new_subplotspec((0, 2)))
-        self.vel_plot.set_title("Velocity (km/s)")
-        self.vel_plot.set_xlim([0, self.date_count])
-        self.vel_plot.set_ylim([0, MAX_VELOCITY])
-        self.vel_plot.set_xticks([], [])
-        self.vel_plot.set_xlabel("time")
-        self.vel_plot.set_ylabel("velocity (km/s)")
+        self.vel_plot.set(
+            title = "Velocity (km/s)",
+            xlim = [0, self.date_count],
+            ylim = [0, MAX_VELOCITY],
+            xticks = [],
+            xlabel = "time",
+            ylabel = "velocity (km/s)"
+        )
 
         # Shows Orion trajectory
         self.map_plot = self.fig.add_subplot(self.gs.new_subplotspec((1, 0), colspan = 3, rowspan = 2))
-        self.map_plot.set_title("Orion's Trajectory")
         self.map_plot.axis("equal")
-        self.map_plot.set_xlim([self.map_min_x, self.map_max_x])
-        self.map_plot.set_ylim([self.map_min_y, self.map_max_y])
-        self.map_plot.set_xlabel("distance (1000 km)")
-        self.map_plot.set_ylabel("distance (km)")
+        self.map_plot.set(
+            title = "Orion's Trajectory",
+            xlim = [MIN_X, MAX_X],
+            ylim = [MIN_Y, MAX_Y],
+            xlabel = "distance (km)",
+            ylabel = "distance (km)"
+        )
 
         # Prevents abbreviation of large numbers on x axis
         self.fig.gca().xaxis.set_major_formatter(FormatStrFormatter("%d"))
@@ -95,9 +99,9 @@ class ArtemisVis:
         (vel_artist,) = self.vel_plot.plot([-1], [-1], color = TELEMETRY_PLOT_COLORS, animated = True)
         (trace_artist,) = self.map_plot.plot([0], [0], color = ORION_TRACE_COLOR, animated = True)
         
-        time_text = self.info_plot.text(0, 0.7, "")
-        distance_text_artist = self.info_plot.text(0, .5, "")
-        vel_text_artist = self.info_plot.text(0, .3, "")
+        time_text = self.info_plot.text(0, TIME_TEXT_Y, "")
+        distance_text_artist = self.info_plot.text(0, DISTANCE_TEXT_Y, "")
+        vel_text_artist = self.info_plot.text(0, VEL_TEXT_Y, "")
 
         # Animate through all time values
         for i in range(len(time_data)):
@@ -138,7 +142,10 @@ class ArtemisVis:
 
             vel_text_artist.set_text(f"Velocity: {vel[i]:,.2f} km/s")
             self.fig.draw_artist(vel_text_artist)
-            
+
+        # Used to stop window closing immediately after animation
+        input("")
+
     # Shows matplotlib window
     def show(self):
         plt.show(block = False)

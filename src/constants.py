@@ -20,5 +20,10 @@ MIN_X = -1200000
 MAX_Y = 1000000
 MIN_Y = -1000000
 
+# Y values for different text items in the info plot
+TIME_TEXT_Y = 0.7
+DISTANCE_TEXT_Y = 0.5
+VEL_TEXT_Y = 0.3
+
 MOON_ERASER_INCREASE = 2000 # How many units of distance to add to moon's radius for moon eraser patch
 DIVIDE_BY = 5               # Used to divide the data by some number for increased animation speed

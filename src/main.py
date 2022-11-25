@@ -11,6 +11,8 @@ if __name__ == "__main__":
         sep = "\s+",
         parse_dates = ["time"]
     )
+
+    # Remove every DIVIDE_BY row for performance reasons
     orion_df = orion_df.iloc[0::DIVIDE_BY]
 
     # Add calculated columns for distance and velocity
@@ -40,11 +42,7 @@ if __name__ == "__main__":
     moon_pos_x = moon_df["moon_x"].to_list()
     moon_pos_y = moon_df["moon_y"].to_list()
 
-    artemis = ArtemisVis(len(time_data), MAX_X, MIN_X, MAX_Y, MIN_Y)
-    artemis.setup_plots()
-
+    artemis = ArtemisVis(len(time_data))
     artemis.show()
-    artemis.animate(time_data, pos_x, pos_y, distance, vel, moon_pos_x, moon_pos_y)
 
-    # Blocking function call to stop window from closing after animation
-    input("")
+    artemis.animate(time_data, pos_x, pos_y, distance, vel, moon_pos_x, moon_pos_y)
