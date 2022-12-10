@@ -6,8 +6,6 @@ A simple Python application to animate Artemis I data using Matplotlib.
 ## Background and Context
 [Artemis](https://www.nasa.gov/specials/artemis/) is NASA's return to the Moon. Powered by the [Space Launch System (SLS)](https://www.nasa.gov/exploration/systems/sls/fs/sls.html), the Artemis program will land humans on the moon for the first time since Apollo 17 in 1972. The first mission in the Artemis program is [Artemis I](https://www.nasa.gov/content/artemis-i-overview), an uncrewed test flight that is sending the [Orion space capsule](https://www.nasa.gov/exploration/systems/orion/about/index.html) into Lunar orbit. 
 
-The Artemis program's unique goals require a unique orbit: a [near-rectilinear halo orbit (NRHO)](https://www.nasa.gov/feature/a-lunar-orbit-that-s-just-right-for-the-international-gateway). The unique NRHO was the inspiration for this visualization project.
-
 ## Visualizing Artemis I
 Ahead of the Artemis I launch, NASA made the [pre-computed Orion ephemeris](https://www.nasa.gov/feature/track-nasa-s-artemis-i-mission-in-real-time) publicly available for download. Using this data, I plotted Orion's journey from the Earth to Moon throughout the entirety of the planned mission. The orbit is animated in 2D looking down at Earth's equatorial plane from above. Animated distance over time and velocity over time plots are also included.
 
